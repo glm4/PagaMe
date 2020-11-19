@@ -7,3 +7,5 @@
 */
 
 "Could not parse a valid user" = "No se encontró un usuario válido";
+"home.amount_instructions" = "Digite la cantidad a pagar";
+"home.welcome_message" = "Bienvenido a\nPagaMe";

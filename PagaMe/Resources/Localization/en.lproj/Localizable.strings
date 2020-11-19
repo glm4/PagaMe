@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  PagaMe
+
+  Created by German on 5/15/18.
+  Copyright © 2018 Rootstrap Inc. All rights reserved.
+*/
+
+"home.amount_instructions" = "Enter the amount you want to pay";
+"home.welcome_message" = "Welcome to\nPagaMe";

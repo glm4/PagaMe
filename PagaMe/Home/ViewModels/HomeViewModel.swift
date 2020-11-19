@@ -8,9 +8,25 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class HomeViewModel {
   
-  var amount: String?
+  private let formatter = NumberFormatter()
   
+  var formattedAmountDriver: Driver<String> {
+    amountRelay.asDriver()
+  }
+  
+  var amountRelay: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
+  
+  func amountInputChange(with text: String) {
+    let formattedString = formatter.string(for: text) ?? "$"
+    
+    amountRelay.accept(formattedString)
+  }
+  
+  init() {
+    formatter.currencySymbol = "$"
+  }
 }
