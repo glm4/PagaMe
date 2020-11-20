@@ -11,21 +11,42 @@ import UIKit
 
 enum HomeRoutes: Route {
   case home
+  case paymentMethods
 
   var screen: UIViewController {
     switch self {
     case .home:
-      guard
-        let navVC = UIStoryboard(
-          name: "Main", bundle: nil
-        ).instantiateInitialViewController() as? UINavigationController,
-        let home = navVC.viewControllers.first as? HomeViewController
-      else {
-        fatalError("HomeViewController could not be instantiated.")
-      }
+      return homeViewController()
       
-      home.viewModel = HomeViewModel()
-      return home
+    case .paymentMethods:
+      return paymentMethodsController()
     }
+  }
+  
+  // MARK: - Convenience builders
+  
+  private func homeViewController() -> UIViewController {
+    guard
+      let navVC = UIStoryboard.main.instantiateInitialViewController() as? UINavigationController,
+      let homeVC = navVC.viewControllers.first as? HomeViewController
+    else {
+      fatalError("HomeViewController could not be instantiated.")
+    }
+    
+    homeVC.viewModel = HomeViewModel()
+    return navVC
+  }
+  
+  private func paymentMethodsController() -> UIViewController {
+    guard
+      let paymentMethodsVC = UIStoryboard.paymentMethods.instantiateViewController(
+        withIdentifier: PaymentMethodsController.identifier
+      ) as? PaymentMethodsController
+    else {
+      fatalError("PaymentMethodsController could not be instantiated.")
+    }
+    
+//    paymentMethodsVC.viewModel = HomeViewModel()
+    return paymentMethodsVC
   }
 }

@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   ) -> Bool {
     IQKeyboardManager.shared.enable = true
 
+    UINavigationBar.appearance().tintColor = .body
+    
     let rootVC = AppNavigator.shared.rootViewController
     window?.rootViewController = rootVC
 

@@ -10,7 +10,7 @@
         <!--Navigation Controller-->
         <scene sceneID="XFt-23-ycy">
             <objects>
-                <navigationController storyboardIdentifier="StartViewController" id="aXS-GV-C4h" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StartViewController" automaticallyAdjustsScrollViewInsets="NO" id="aXS-GV-C4h" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KuO-wr-86C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -56,6 +56,11 @@ PagaMe</string>
                                 <color key="textColor" red="0.45508993310000001" green="0.41961441859999998" blue="0.40671423159999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPb-8F-FIW">
+                                <rect key="frame" x="151" y="598" width="73" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Continue"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95331488715277779" green="0.95331488715277779" blue="0.95331488715277779" alpha="1" colorSpace="calibratedRGB"/>
                         <accessibility key="accessibilityConfiguration" identifier="StartView"/>
@@ -72,6 +77,7 @@ PagaMe</string>
                     <connections>
                         <outlet property="amountField" destination="bwd-rZ-jo0" id="fz7-tX-zcM"/>
                         <outlet property="amountLabel" destination="vqM-CB-i09" id="hfS-dW-TBS"/>
+                        <outlet property="continueButton" destination="qPb-8F-FIW" id="aai-Tj-3cc"/>
                         <outlet property="welcomeLabel" destination="nMy-eR-RsW" id="MCb-SY-vs8"/>
                     </connections>
                 </viewController>

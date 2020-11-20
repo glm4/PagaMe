@@ -10,7 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: UIViewController, ActivityIndicatorPresenter {
+class HomeViewController: UIViewController,
+  ActivityIndicatorPresenter,
+  ContinueButtonPresentable {
+  
+  var validationDriver: Driver<Bool> {
+    viewModel.validAmountDriver
+  }
 
   let activityIndicator = UIActivityIndicatorView()
   
@@ -43,15 +49,12 @@ class HomeViewController: UIViewController, ActivityIndicatorPresenter {
       amountField.addBorder(color: .brand, weight: 1.5)
       amountField.setRoundBorders(Layout.AmountField.cornerRadius)
       
+      amountField.keyboardType = .decimalPad
       amountField.delegate = self
     }
   }
   
-  @IBOutlet weak var continueButton: UIButton! {
-    didSet {
-      continueButton.applyDefaultStyle()
-    }
-  }
+  @IBOutlet weak var continueButton: UIButton!
   
   var viewModel: HomeViewModel!
   let disposeBag = DisposeBag()
@@ -61,6 +64,8 @@ class HomeViewController: UIViewController, ActivityIndicatorPresenter {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    amountField.becomeFirstResponder()
+    stylizeContinueButton()
     setupLayout()
     setupBindings()
   }
@@ -72,33 +77,51 @@ class HomeViewController: UIViewController, ActivityIndicatorPresenter {
     amountField.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([
+      // Amount Field
       amountField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
       amountField.leadingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-        constant: Layout.horizontalMargins
+        constant: AtomicLayout.horizontalMargins
       ),
       amountField.trailingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: -Layout.horizontalMargins
+        constant: -AtomicLayout.horizontalMargins
       ),
       amountField.heightAnchor.constraint(equalToConstant: Layout.AmountField.height),
-      
-      amountLabel.leadingAnchor.constraint(equalTo: amountField.leadingAnchor),
-      amountLabel.trailingAnchor.constraint(
-        greaterThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: -Layout.horizontalMargins
-      ),
       amountField.topAnchor.constraint(
         equalTo: amountLabel.bottomAnchor,
         constant: Layout.AmountField.top
+      ),
+      
+      // Amount Label
+      amountLabel.leadingAnchor.constraint(equalTo: amountField.leadingAnchor),
+      amountLabel.trailingAnchor.constraint(
+        greaterThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor,
+        constant: -AtomicLayout.horizontalMargins
       )
     ])
+    
+    setupButtonLayoutConstraints()
   }
   
   private func setupBindings() {
     viewModel.formattedAmountDriver
       .drive(amountField.rx.text)
       .disposed(by: disposeBag)
+
+    setupButtonBindings()
+    
+    viewModel.paymentStatusDriver
+      .filter { $0 == .amount }
+      .asObservable()
+      .subscribe(onNext: {[weak self] _ in
+        
+      self?.navigateToPaymentMethods()
+    }).disposed(by: disposeBag)
+  }
+  
+  private func navigateToPaymentMethods() {
+    AppNavigator.shared.navigate(to: HomeRoutes.paymentMethods, with: .push)
   }
 }
 
@@ -109,6 +132,20 @@ extension HomeViewController: UITextFieldDelegate {
     shouldChangeCharactersIn range: NSRange,
     replacementString string: String
   ) -> Bool {
+    if string.isEmpty {
+      return true
+    }
+    
+    if string == viewModel.currencyDecimalSeparator {
+      return !(textField.text?.contains(viewModel.currencyDecimalSeparator) ?? false) &&
+        (textField.text?.contains(viewModel.currencySymbol) ?? false)
+    }
+    
+    if string == viewModel.currencySymbol {
+      return !(textField.text?.contains(viewModel.currencySymbol) ?? false)
+    }
+    
+    guard string.hasNumbers else { return false }
     
     let nsString = NSString(string: textField.text ?? "")
     let finalInput = nsString.replacingCharacters(in: range, with: string)
@@ -117,11 +154,15 @@ extension HomeViewController: UITextFieldDelegate {
     
     return false
   }
+  
+  // MARK: - ContinueButtonPresentable
+
+  func continueButtonTapped() {
+    viewModel.confirmedAmount()
+  }
 }
 
 enum Layout {
-  
-  static let horizontalMargins: CGFloat = 16
   
   enum AmountField {
     
