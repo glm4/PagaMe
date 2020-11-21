@@ -7,5 +7,11 @@
 */
 
 "Could not parse a valid user" = "No se encontró un usuario válido";
+"continue_button.default" = "Continuar";
+
+// Home
 "home.amount_instructions" = "Digite la cantidad a pagar";
 "home.welcome_message" = "Bienvenido a\nPagaMe";
+
+// Payment Methods
+"payment_methods.instructions" = "Seleccione el método de pago para esta trasnferencia";

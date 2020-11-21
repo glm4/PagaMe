@@ -14,5 +14,5 @@ enum AtomicLayout {
 
 enum ContinueButton {
   static let height: CGFloat = 60
-  static let bottom: CGFloat = 40
+  static let bottom: CGFloat = 25
 }

@@ -24,7 +24,7 @@ internal final class PaymentManager {
       
       if case .notStarted = lhs, case .notStarted = rhs { return true }
       if case .amount = lhs, case .amount = rhs { return true }
-      if case .method = lhs, case .method = rhs { return true }
+      if case .paymentMethod = lhs, case .paymentMethod = rhs { return true }
       if case .issuer = lhs, case .issuer = rhs { return true }
       if case .installment = lhs, case .installment = rhs { return true }
       if case .summary = lhs, case .summary = rhs { return true }
@@ -34,7 +34,7 @@ internal final class PaymentManager {
     
     case notStarted
     case amount
-    case method
+    case paymentMethod
     case issuer
     case installment
     case summary
@@ -59,6 +59,11 @@ internal final class PaymentManager {
   func setAmount(amount: Double) {
     //Payment.amount= amount
     statusRelay.accept(.amount)
+  }
+  
+  func setPaymentMethod(paymentMethod: PaymentMethod) {
+    //Payment.method = paymentMethod
+    statusRelay.accept(.paymentMethod)
   }
   
 }

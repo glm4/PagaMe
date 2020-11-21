@@ -46,7 +46,7 @@ enum HomeRoutes: Route {
       fatalError("PaymentMethodsController could not be instantiated.")
     }
     
-//    paymentMethodsVC.viewModel = HomeViewModel()
+    paymentMethodsVC.viewModel = PaymentMethodsViewModel()
     return paymentMethodsVC
   }
 }

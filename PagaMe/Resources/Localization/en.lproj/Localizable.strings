@@ -6,5 +6,11 @@
   Copyright © 2018 Rootstrap Inc. All rights reserved.
 */
 
+"continue_button.default" = "Continue";
+
+// Home
 "home.amount_instructions" = "Enter the amount you want to pay";
 "home.welcome_message" = "Welcome to\nPagaMe";
+
+// Payment Methods
+"payment_methods.instructions" = "Select the method for this transaction";

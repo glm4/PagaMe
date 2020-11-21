@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: UIViewController,
+internal final class HomeViewController: UIViewController,
   ActivityIndicatorPresenter,
   ContinueButtonPresentable {
   

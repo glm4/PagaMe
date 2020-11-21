@@ -11,26 +11,27 @@ import Foundation
 class PaymentsAPI {
   
   class func getPaymentMethods(
-    success: @escaping () -> Void,
+    success: @escaping (_ paymentMethods: [PaymentMethod]) -> Void,
     failure: @escaping (_ error: Error) -> Void
   ) {
     APIClient.request(
       .get,
       url: "/payment_methods",
       success: { response, _ in
-//        guard
-//          let userDictionary = response["user"] as? [String: Any],
-//          let user = User(dictionary: userDictionary)
-//        else {
-//          failure(App.error(
-//            domain: .parsing,
-//            localizedDescription: "Could not parse a valid user".localized
-//          ))
-//          return
-//        }
+        guard
+          let rootObject = response["root"] as? [[String: Any]]
+        else {
+          failure(App.error(
+            domain: .parsing,
+            localizedDescription: "Could not parse a valid Payment Method".localized
+          ))
+          return
+        }
         
-//        UserDataManager.currentUser = user
-        success()
+        let paymentMethods = rootObject.compactMap {
+          try? JSONDecoder().decode(PaymentMethod.self, from: $0)
+        }
+        success(paymentMethods)
       },
       failure: failure
     )

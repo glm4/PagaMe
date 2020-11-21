@@ -12,6 +12,7 @@ import RxCocoa
 
 internal protocol ContinueButtonPresentable: RxDisposable {
   var continueButton: UIButton! { get }
+  var buttonTitle: String { get }
   var validationDriver: Driver<Bool> { get }
   
   func setupButtonLayoutConstraints()
@@ -21,6 +22,10 @@ internal protocol ContinueButtonPresentable: RxDisposable {
 }
 
 extension ContinueButtonPresentable where Self: UIViewController {
+  
+  var buttonTitle: String {
+    "continue_button.default".localized
+  }
   
   func setupButtonLayoutConstraints() {
     continueButton.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +64,9 @@ extension ContinueButtonPresentable where Self: UIViewController {
   }
   
   func stylizeContinueButton() {
+    continueButton.setTitleColor(.brand, for: .normal)
+    continueButton.setTitle(buttonTitle, for: .normal)
+    
     continueButton.applyDefaultStyle()
   }
   
