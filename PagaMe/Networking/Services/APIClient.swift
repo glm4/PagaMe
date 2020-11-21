@@ -21,7 +21,7 @@ public enum SwiftBaseErrorCode: Int {
 }
 
 public typealias SuccessCallback = (
-  _ responseObject: [String: Any],
+  _ responseObject: Data,
   _ responseHeaders: [AnyHashable: Any]
 ) -> Void
 
@@ -191,7 +191,7 @@ internal class APIClient {
         response.statusCode
       )
       emptyResponseAllowed ?
-        success([:], response.allHeaderFields) : failure(defaultError)
+        success(Data(), response.allHeaderFields) : failure(defaultError)
       return true
     }
     
@@ -236,7 +236,7 @@ internal class APIClient {
     if let serializationError = serializationError {
       failure(serializationError)
     } else {
-      success(dictionary ?? [:], response.allHeaderFields)
+      success(data, response.allHeaderFields)
     }
   }
 }

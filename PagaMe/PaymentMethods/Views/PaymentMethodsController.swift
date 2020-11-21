@@ -55,7 +55,6 @@ internal final class PaymentMethodsController: UIViewController,
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    tableView.backgroundColor = .black
     viewModel.fetchPaymentMethods()
     stylizeContinueButton()
     setupLayout()
@@ -112,6 +111,15 @@ internal final class PaymentMethodsController: UIViewController,
       .map { $0 == .loading }
       .drive(activityIndicator.rx.isAnimating)
       .disposed(by: disposeBag)
+    
+    viewModel.paymentMethodsDriver
+      .asObservable()
+      .bind(to: tableView.rx.items(
+        cellIdentifier: "UITableViewCell",
+        cellType: UITableViewCell.self
+      )) { row, method, cell in
+        cell.textLabel?.text = method.name
+      }.disposed(by: disposeBag)
   }
 
   func continueButtonTapped() {

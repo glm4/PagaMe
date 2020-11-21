@@ -19,7 +19,10 @@ class PaymentsAPI {
       url: "/payment_methods",
       success: { response, _ in
         guard
-          let rootObject = response["root"] as? [[String: Any]]
+          let paymentMethods = try? JSONDecoder().decode(
+            [PaymentMethod].self,
+            from: response
+          )
         else {
           failure(App.error(
             domain: .parsing,
@@ -28,9 +31,6 @@ class PaymentsAPI {
           return
         }
         
-        let paymentMethods = rootObject.compactMap {
-          try? JSONDecoder().decode(PaymentMethod.self, from: $0)
-        }
         success(paymentMethods)
       },
       failure: failure
