@@ -7,6 +7,7 @@ target 'PagaMe' do
   pod 'IQKeyboardManagerSwift', '~> 6.1.1'
   pod 'RxSwift', '6.0.0-rc.1'
   pod 'RxCocoa', '6.0.0-rc.1'
+  pod 'Kingfisher', '~> 5.0'
   
   target 'PagaMeUITests' do
     inherit! :complete

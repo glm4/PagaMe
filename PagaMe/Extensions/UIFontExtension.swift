@@ -11,5 +11,7 @@ import UIKit
 extension UIFont {
   
   static let defaultRegular = UIFont.systemFont(ofSize: 16)
+  static let defaultSemibold = UIFont.systemFont(ofSize: 16, weight: .semibold)
+  
   static let header = UIFont.systemFont(ofSize: 32)
 }

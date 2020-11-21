@@ -44,10 +44,10 @@ internal final class HomeViewController: UIViewController,
     didSet {
       amountField.tintColor = .body
       amountField.textColor = .body
-      amountField.font = .defaultRegular
+      amountField.font = UIFont.defaultRegular.withSize(40)
       
       amountField.addBorder(color: .brand, weight: 1.5)
-      amountField.setRoundBorders(Layout.AmountField.cornerRadius)
+      amountField.setRoundBorders(AtomicLayout.defaultCornerRadius)
       
       amountField.keyboardType = .decimalPad
       amountField.delegate = self
@@ -81,11 +81,11 @@ internal final class HomeViewController: UIViewController,
       amountField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
       amountField.leadingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-        constant: AtomicLayout.horizontalMargins
+        constant: AtomicLayout.defaultMargins
       ),
       amountField.trailingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: -AtomicLayout.horizontalMargins
+        constant: -AtomicLayout.defaultMargins
       ),
       amountField.heightAnchor.constraint(equalToConstant: Layout.AmountField.height),
       amountField.topAnchor.constraint(
@@ -97,7 +97,7 @@ internal final class HomeViewController: UIViewController,
       amountLabel.leadingAnchor.constraint(equalTo: amountField.leadingAnchor),
       amountLabel.trailingAnchor.constraint(
         greaterThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: -AtomicLayout.horizontalMargins
+        constant: -AtomicLayout.defaultMargins
       )
     ])
     
@@ -166,10 +166,8 @@ enum Layout {
   
   enum AmountField {
     
-    static let height: CGFloat = 30
+    static let height: CGFloat = 45
     static let top: CGFloat = 10
-    
-    static let cornerRadius: CGFloat = 4
     
   }
 }

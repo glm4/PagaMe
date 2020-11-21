@@ -50,6 +50,9 @@
 		9BB47CAF25688120004E1C99 /* StoryboardIdentificable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB47CAE25688120004E1C99 /* StoryboardIdentificable.swift */; };
 		9BB47CB125688781004E1C99 /* PaymentMethodsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB47CB025688781004E1C99 /* PaymentMethodsViewModel.swift */; };
 		9BB47CB425688819004E1C99 /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB47CB325688819004E1C99 /* PaymentMethod.swift */; };
+		9BB47CB825695F49004E1C99 /* PaymentMethodViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB47CB625695F49004E1C99 /* PaymentMethodViewCell.swift */; };
+		9BB47CB925695F49004E1C99 /* PaymentMethodViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BB47CB725695F49004E1C99 /* PaymentMethodViewCell.xib */; };
+		9BB47CBC2569624B004E1C99 /* PaymentMethodPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB47CBB2569624B004E1C99 /* PaymentMethodPresentable.swift */; };
 		9BD01E361F01641E007255E3 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD01E351F01641E007255E3 /* DictionaryExtension.swift */; };
 		9BFA84F31C776827009F64E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BFA84F21C776827009F64E4 /* LaunchScreen.storyboard */; };
 		D71DA4E332DA2F8BE0515003 /* Pods_PagaMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40C135F3FB8B70ED80922961 /* Pods_PagaMe.framework */; };
@@ -142,6 +145,9 @@
 		9BB47CAE25688120004E1C99 /* StoryboardIdentificable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentificable.swift; sourceTree = "<group>"; };
 		9BB47CB025688781004E1C99 /* PaymentMethodsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodsViewModel.swift; sourceTree = "<group>"; };
 		9BB47CB325688819004E1C99 /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
+		9BB47CB625695F49004E1C99 /* PaymentMethodViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewCell.swift; sourceTree = "<group>"; };
+		9BB47CB725695F49004E1C99 /* PaymentMethodViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentMethodViewCell.xib; sourceTree = "<group>"; };
+		9BB47CBB2569624B004E1C99 /* PaymentMethodPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodPresentable.swift; sourceTree = "<group>"; };
 		9BD01E351F01641E007255E3 /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
 		9BFA84F21C776827009F64E4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D63FAC8A1B3828BC1BACE68 /* Pods-PagaMe-PagaMeUITests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PagaMe-PagaMeUITests.staging.xcconfig"; path = "Target Support Files/Pods-PagaMe-PagaMeUITests/Pods-PagaMe-PagaMeUITests.staging.xcconfig"; sourceTree = "<group>"; };
@@ -319,6 +325,7 @@
 		9B409E6E25687F1A004131EB /* PaymentMethods */ = {
 			isa = PBXGroup;
 			children = (
+				9BB47CBA2569623F004E1C99 /* Protocols */,
 				9BB47CB22568880E004E1C99 /* Model */,
 				9B409E7125687F2F004131EB /* ViewModel */,
 				9B409E7025687F26004131EB /* Views */,
@@ -338,6 +345,7 @@
 		9B409E7025687F26004131EB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9BB47CB525695F15004E1C99 /* Cells */,
 				9B409E7425687FE2004131EB /* PaymentMethodsController.swift */,
 			);
 			path = Views;
@@ -425,6 +433,23 @@
 				9BB47CB325688819004E1C99 /* PaymentMethod.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9BB47CB525695F15004E1C99 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9BB47CB625695F49004E1C99 /* PaymentMethodViewCell.swift */,
+				9BB47CB725695F49004E1C99 /* PaymentMethodViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		9BB47CBA2569623F004E1C99 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9BB47CBB2569624B004E1C99 /* PaymentMethodPresentable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		9BDA91DF1C7390C10003877D /* Networking */ = {
@@ -639,6 +664,7 @@
 				9BFA84F31C776827009F64E4 /* LaunchScreen.storyboard in Resources */,
 				9B409E7325687F45004131EB /* PaymentMethods.storyboard in Resources */,
 				9B8D306B20AB456C0050697F /* Localizable.strings in Resources */,
+				9BB47CB925695F49004E1C99 /* PaymentMethodViewCell.xib in Resources */,
 				9B0C72721C738D3400BAF3B1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -662,6 +688,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-PagaMe-PagaMeUITests/Pods-PagaMe-PagaMeUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -671,6 +698,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -690,6 +718,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-PagaMe/Pods-PagaMe-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -698,6 +727,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -798,6 +828,8 @@
 				E81171921DE5EFB7003D3DF5 /* ViewControllerExtension.swift in Sources */,
 				074D20DB248EA832002A39B4 /* PaymentsAPI.swift in Sources */,
 				9B409E6125686C55004131EB /* PaymentManager.swift in Sources */,
+				9BB47CBC2569624B004E1C99 /* PaymentMethodPresentable.swift in Sources */,
+				9BB47CB825695F49004E1C99 /* PaymentMethodViewCell.swift in Sources */,
 				9B409E5625672434004131EB /* UIFontExtension.swift in Sources */,
 				FABDC9221EE1EB2B000DDAC3 /* ConfigurationManager.swift in Sources */,
 				9B409E6625686F43004131EB /* CurrencyPresenter.swift in Sources */,

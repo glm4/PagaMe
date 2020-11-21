@@ -10,6 +10,14 @@ import Foundation
 
 extension JSONDecoder {
   
+  static var defaultDecoder: JSONDecoder = {
+    let decoder = JSONDecoder()
+    
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    
+    return decoder
+  }()
+  
   func decode<T>(
     _ type: T.Type, from dictionary: [String: Any]
   ) throws -> T where T: Decodable {

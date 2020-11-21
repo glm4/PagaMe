@@ -36,11 +36,11 @@ extension ContinueButtonPresentable where Self: UIViewController {
       ),
       continueButton.leadingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-        constant: AtomicLayout.horizontalMargins
+        constant: AtomicLayout.defaultMargins
       ),
       continueButton.trailingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: -AtomicLayout.horizontalMargins
+        constant: -AtomicLayout.defaultMargins
       ),
       continueButton.bottomAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.bottomAnchor,

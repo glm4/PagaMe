@@ -14,6 +14,7 @@ struct PaymentMethod: Codable {
 
   let id: String
   let name: String
-  let imageURL: URL?
+  let secureThumbnail: URL?
+  let paymentTypeId: String
   
 }

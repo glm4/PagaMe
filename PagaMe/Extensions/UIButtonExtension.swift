@@ -12,7 +12,7 @@ extension UIButton {
   
   func applyDefaultStyle() {
     titleLabel?.font = .defaultRegular
-    setRoundBorders(4)
+    setRoundBorders(AtomicLayout.defaultCornerRadius)
     backgroundColor = .body
   }
 }

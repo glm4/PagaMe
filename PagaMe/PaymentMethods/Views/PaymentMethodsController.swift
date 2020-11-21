@@ -23,8 +23,7 @@ internal final class PaymentMethodsController: UIViewController,
   }()
   
   var validationDriver: Driver<Bool> {
-    //TODO: Update with viewModel
-    Driver<Bool>.just(true)
+    viewModel.selectedMethodDriver.map({ $0 != nil })
   }
   
   var viewModel: PaymentMethodsViewModel!
@@ -47,6 +46,7 @@ internal final class PaymentMethodsController: UIViewController,
   @IBOutlet weak var tableView: UITableView! {
     didSet {
       tableView.separatorStyle = .none
+//      tableView.cell
     }
   }
   
@@ -55,13 +55,24 @@ internal final class PaymentMethodsController: UIViewController,
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    viewModel.fetchPaymentMethods()
-    stylizeContinueButton()
+    setupUI()
     setupLayout()
     setupBindings()
+    
+    viewModel.fetchPaymentMethods()
   }
   
   // MARK: - UI
+  
+  private func setupUI() {
+    let cellNib = UINib(nibName: PaymentMethodViewCell.reuseIdentifier, bundle: nil)
+    tableView.register(
+      cellNib,
+      forCellReuseIdentifier: PaymentMethodViewCell.reuseIdentifier
+    )
+    
+    stylizeContinueButton()
+  }
 
   private func setupLayout() {
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,33 +82,33 @@ internal final class PaymentMethodsController: UIViewController,
       //Instructions Label
       instructionLabel.topAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.topAnchor,
-        constant: AtomicLayout.horizontalMargins
+        constant: AtomicLayout.defaultMargins
       ),
       instructionLabel.leadingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-        constant: AtomicLayout.horizontalMargins
+        constant: AtomicLayout.defaultMargins
       ),
       instructionLabel.trailingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: -AtomicLayout.horizontalMargins
+        constant: -AtomicLayout.defaultMargins
       ),
       
       // Table View
       tableView.topAnchor.constraint(
         equalTo: instructionLabel.bottomAnchor,
-        constant: AtomicLayout.horizontalMargins
+        constant: AtomicLayout.defaultMargins
       ),
       tableView.bottomAnchor.constraint(
         equalTo: continueButton.topAnchor,
-        constant: -AtomicLayout.horizontalMargins
+        constant: -AtomicLayout.defaultMargins
       ),
       tableView.leadingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-        constant: -AtomicLayout.horizontalMargins
+        constant: -AtomicLayout.defaultMargins
       ),
       tableView.trailingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: AtomicLayout.horizontalMargins
+        constant: AtomicLayout.defaultMargins
       )
     ])
     
@@ -109,17 +120,26 @@ internal final class PaymentMethodsController: UIViewController,
     
     viewModel.statusDriver
       .map { $0 == .loading }
-      .drive(activityIndicator.rx.isAnimating)
-      .disposed(by: disposeBag)
+      .drive(onNext: { [weak self] isLoading in
+        self?.showActivityIndicator(isLoading)
+      }).disposed(by: disposeBag)
     
     viewModel.paymentMethodsDriver
       .asObservable()
       .bind(to: tableView.rx.items(
-        cellIdentifier: "UITableViewCell",
-        cellType: UITableViewCell.self
-      )) { row, method, cell in
-        cell.textLabel?.text = method.name
+        cellIdentifier: PaymentMethodViewCell.reuseIdentifier,
+        cellType: PaymentMethodViewCell.self
+      )) { _, method, cell in
+        
+        cell.selectionStyle = .none
+        cell.configure(with: method)
       }.disposed(by: disposeBag)
+    
+    tableView.rx.itemSelected.subscribe({ [weak self] event in
+      guard let indexPath = event.element?.row else { return }
+      
+      self?.viewModel.selectPaymentMethod(atIndex: indexPath)
+    }).disposed(by: disposeBag)
   }
 
   func continueButtonTapped() {

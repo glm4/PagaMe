@@ -23,6 +23,10 @@ class PaymentMethodsViewModel: PaymentFlowManageable {
    }
   
   private var paymentMethodsRelay = BehaviorRelay<[PaymentMethod]>(value: [])
+  
+  private var paymentMethods: [PaymentMethod] {
+    paymentMethodsRelay.value
+  }
 
   var paymentMethodsDriver: Driver<[PaymentMethod]> {
     paymentMethodsRelay.asDriver()
@@ -30,16 +34,26 @@ class PaymentMethodsViewModel: PaymentFlowManageable {
   
   private var selectedMethodRelay = BehaviorRelay<PaymentMethod?>(value: nil)
   
+  var selectedMethodDriver: Driver<PaymentMethod?> {
+     selectedMethodRelay.asDriver()
+   }
+  
   init() {
     
   }
   
   // MARK: - Public API
   
-  func selectPaymentMethod() {
-    guard let paymentMethod = selectedMethodRelay.value else { return }
+  func selectPaymentMethod(atIndex index: Int) {
+    guard index >= 0 && index < paymentMethods.count else { return }
     
-    paymentManager.setPaymentMethod(paymentMethod: paymentMethod)
+    selectedMethodRelay.accept(paymentMethodsRelay.value[index])
+  }
+  
+  func confirmPaymentMethod() {
+    guard let selectedMethod = selectedMethodRelay.value else { return }
+    
+    paymentManager.setPaymentMethod(paymentMethod: selectedMethod)
   }
   
   func fetchPaymentMethods() {
@@ -49,11 +63,11 @@ class PaymentMethodsViewModel: PaymentFlowManageable {
       
       self.paymentMethodsRelay.accept(methods)
       self.statusRelay.accept(.idle)
-    }, failure: { error in
+      
+    }, failure: { _ in
       // Debug error
       self.statusRelay.accept(.failed)
     })
   }
 
 }
-

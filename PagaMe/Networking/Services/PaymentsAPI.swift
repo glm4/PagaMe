@@ -19,7 +19,7 @@ class PaymentsAPI {
       url: "/payment_methods",
       success: { response, _ in
         guard
-          let paymentMethods = try? JSONDecoder().decode(
+          let paymentMethods = try? JSONDecoder.defaultDecoder.decode(
             [PaymentMethod].self,
             from: response
           )
