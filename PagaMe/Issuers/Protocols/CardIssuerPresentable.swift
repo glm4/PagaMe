@@ -7,3 +7,30 @@
 //
 
 import Foundation
+
+protocol CardIssuerPresentable: CellDetailPresentable {
+  
+  var issuerName: String { get }
+  var thumbnailURL: URL? { get }
+  
+}
+
+extension Issuer: CardIssuerPresentable {
+  
+  var headline: String {
+    issuerName
+  }
+  
+  var subHeadline: String {
+    ""
+  }
+  
+  var issuerName: String {
+    name
+  }
+  
+  var thumbnailURL: URL? {
+    secureThumbnail
+  }
+  
+}

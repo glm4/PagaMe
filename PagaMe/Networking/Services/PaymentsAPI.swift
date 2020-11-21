@@ -10,13 +10,16 @@ import Foundation
 
 class PaymentsAPI {
   
+  private static let paymentsPath = "/payment_methods"
+  private static let issuersPath = "\(paymentsPath)/card_issuers"
+  
   class func getPaymentMethods(
     success: @escaping (_ paymentMethods: [PaymentMethod]) -> Void,
     failure: @escaping (_ error: Error) -> Void
   ) {
     APIClient.request(
       .get,
-      url: "/payment_methods",
+      url: paymentsPath,
       success: { response, _ in
         guard
           let paymentMethods = try? JSONDecoder.defaultDecoder.decode(
@@ -32,6 +35,35 @@ class PaymentsAPI {
         }
         
         success(paymentMethods)
+      },
+      failure: failure
+    )
+  }
+  
+  class func getIssuers(
+    paymentMethodId: String,
+    success: @escaping (_ issuers: [Issuer]) -> Void,
+    failure: @escaping (_ error: Error) -> Void
+  ) {
+    APIClient.request(
+      .get,
+      url: issuersPath,
+      params: ["payment_method_id": paymentMethodId],
+      success: { response, _ in
+        guard
+          let cardIssuers = try? JSONDecoder.defaultDecoder.decode(
+            [Issuer].self,
+            from: response
+          )
+        else {
+          failure(App.error(
+            domain: .parsing,
+            localizedDescription: "Could not parse a valid Issuer".localized
+          ))
+          return
+        }
+        
+        success(cardIssuers)
       },
       failure: failure
     )

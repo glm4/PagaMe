@@ -10,17 +10,13 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-enum PaymentMethodsStatus {
-  case loading, idle, failed
-}
-
-class PaymentMethodsViewModel: PaymentFlowManageable {
-
-  private var statusRelay = BehaviorRelay<PaymentMethodsStatus>(value: .idle)
+class PaymentMethodsViewModel: PaymentFlowManageable, NetworkActivityStatus {
   
-  var statusDriver: Driver<PaymentMethodsStatus> {
-     statusRelay.asDriver()
-   }
+  // MARK: - Properties
+  
+  private(set) var statusRelay: BehaviorRelay<NetworkStatus> = BehaviorRelay<NetworkStatus>(
+    value: .idle
+  )
   
   private var paymentMethodsRelay = BehaviorRelay<[PaymentMethod]>(value: [])
   
@@ -35,11 +31,7 @@ class PaymentMethodsViewModel: PaymentFlowManageable {
   private var selectedMethodRelay = BehaviorRelay<PaymentMethod?>(value: nil)
   
   var selectedMethodDriver: Driver<PaymentMethod?> {
-     selectedMethodRelay.asDriver()
-   }
-  
-  init() {
-    
+    selectedMethodRelay.asDriver()
   }
   
   // MARK: - Public API

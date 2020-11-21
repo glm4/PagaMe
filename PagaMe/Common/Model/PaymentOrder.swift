@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct PaymentOrder {
+  
+  var amount: Decimal?
+  var paymentMethod: PaymentMethod?
+  var issuer: Issuer?
+  
+}

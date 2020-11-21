@@ -14,3 +14,6 @@
 
 // Payment Methods
 "payment_methods.instructions" = "Select the method for this transaction";
+
+//Issuers
+"issuers.instructions" = "Select your card provider";

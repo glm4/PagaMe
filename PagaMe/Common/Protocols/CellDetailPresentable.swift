@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+protocol CellDetailPresentable {
+  
+  var headline: String { get }
+  var subHeadline: String { get }
+  var thumbnailURL: URL? { get }
+  
+}

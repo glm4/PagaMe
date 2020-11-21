@@ -7,7 +7,26 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
-enum NetworkState: Equatable {
-  case idle, loading, error(_ error: String)
+enum NetworkStatus: Equatable {
+  
+  case loading, idle, failed
+  
+}
+
+protocol NetworkActivityStatus {
+  
+  var statusRelay: BehaviorRelay<NetworkStatus> { get }
+  var statusDriver: Driver<NetworkStatus> { get }
+  
+}
+
+extension NetworkActivityStatus {
+ 
+  var statusDriver: Driver<NetworkStatus> {
+    statusRelay.asDriver()
+  }
+  
 }

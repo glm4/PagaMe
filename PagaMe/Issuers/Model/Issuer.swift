@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+struct Issuer: Codable {
+  
+  let id: String
+  let name: String
+  let secureThumbnail: URL?
+  let processingMode: String?
+  
+}

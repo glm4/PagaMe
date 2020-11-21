@@ -15,3 +15,6 @@
 
 // Payment Methods
 "payment_methods.instructions" = "Seleccione el método de pago para esta trasnferencia";
+
+//Issuers
+"issuers.instructions" = "Seleccione el proveedor de su tarjeta";

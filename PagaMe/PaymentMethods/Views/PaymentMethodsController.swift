@@ -10,44 +10,20 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-internal final class PaymentMethodsController: UIViewController,
-  ContinueButtonPresentable, ActivityIndicatorPresenter {
+internal final class PaymentMethodsController: ListViewController {
   
-  lazy var activityIndicator: UIActivityIndicatorView = {
-    let indicator = UIActivityIndicatorView()
-    
-    indicator.hidesWhenStopped = true
-    indicator.color = .brand
-    
-    return indicator
-  }()
-  
-  var validationDriver: Driver<Bool> {
+  override var validationDriver: Driver<Bool> {
     viewModel.selectedMethodDriver.map({ $0 != nil })
   }
   
-  var viewModel: PaymentMethodsViewModel!
-  private(set) var disposeBag = DisposeBag()
-  
-  // MARK: - Properties
-
-  @IBOutlet weak var continueButton: UIButton!
-  
-  @IBOutlet weak var instructionLabel: UILabel! {
-    didSet {
-      instructionLabel.text = "payment_methods.instructions".localized
-      
-      instructionLabel.numberOfLines = 2
-      instructionLabel.font = .defaultRegular
-      instructionLabel.textColor = .body
-    }
+  override var statusDriver: Driver<NetworkStatus> {
+    viewModel.statusDriver
   }
   
-  @IBOutlet weak var tableView: UITableView! {
-    didSet {
-      tableView.separatorStyle = .none
-//      tableView.cell
-    }
+  var viewModel: PaymentMethodsViewModel!
+
+  override var instructionsLocalizationKey: String {
+    "payment_methods.instructions"
   }
   
   // MARK: - Lifecycle Events
@@ -55,80 +31,29 @@ internal final class PaymentMethodsController: UIViewController,
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    setupUI()
-    setupLayout()
-    setupBindings()
-    
     viewModel.fetchPaymentMethods()
   }
   
   // MARK: - UI
   
-  private func setupUI() {
-    let cellNib = UINib(nibName: PaymentMethodViewCell.reuseIdentifier, bundle: nil)
+  override func setupUI() {
+    super.setupUI()
+    
+    let cellNib = UINib(nibName: DetailsViewCell.reusableNibName, bundle: nil)
     tableView.register(
       cellNib,
       forCellReuseIdentifier: PaymentMethodViewCell.reuseIdentifier
     )
-    
-    stylizeContinueButton()
-  }
-
-  private func setupLayout() {
-    tableView.translatesAutoresizingMaskIntoConstraints = false
-    instructionLabel.translatesAutoresizingMaskIntoConstraints = false
-    
-    NSLayoutConstraint.activate([
-      //Instructions Label
-      instructionLabel.topAnchor.constraint(
-        equalTo: view.safeAreaLayoutGuide.topAnchor,
-        constant: AtomicLayout.defaultMargins
-      ),
-      instructionLabel.leadingAnchor.constraint(
-        equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-        constant: AtomicLayout.defaultMargins
-      ),
-      instructionLabel.trailingAnchor.constraint(
-        equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: -AtomicLayout.defaultMargins
-      ),
-      
-      // Table View
-      tableView.topAnchor.constraint(
-        equalTo: instructionLabel.bottomAnchor,
-        constant: AtomicLayout.defaultMargins
-      ),
-      tableView.bottomAnchor.constraint(
-        equalTo: continueButton.topAnchor,
-        constant: -AtomicLayout.defaultMargins
-      ),
-      tableView.leadingAnchor.constraint(
-        equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-        constant: -AtomicLayout.defaultMargins
-      ),
-      tableView.trailingAnchor.constraint(
-        equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: AtomicLayout.defaultMargins
-      )
-    ])
-    
-    setupButtonLayoutConstraints()
   }
   
-  private func setupBindings() {
-    setupButtonBindings()
-    
-    viewModel.statusDriver
-      .map { $0 == .loading }
-      .drive(onNext: { [weak self] isLoading in
-        self?.showActivityIndicator(isLoading)
-      }).disposed(by: disposeBag)
+  override func setupBindings() {
+    super.setupBindings()
     
     viewModel.paymentMethodsDriver
       .asObservable()
       .bind(to: tableView.rx.items(
         cellIdentifier: PaymentMethodViewCell.reuseIdentifier,
-        cellType: PaymentMethodViewCell.self
+        cellType: DetailsViewCell.self
       )) { _, method, cell in
         
         cell.selectionStyle = .none
@@ -140,9 +65,21 @@ internal final class PaymentMethodsController: UIViewController,
       
       self?.viewModel.selectPaymentMethod(atIndex: indexPath)
     }).disposed(by: disposeBag)
+    
+    viewModel.paymentStatusDriver
+      .filter { $0 == .paymentMethod }
+      .asObservable()
+      .subscribe(onNext: {[weak self] _ in
+        
+      self?.navigateToCardIssuers()
+    }).disposed(by: disposeBag)
   }
 
-  func continueButtonTapped() {
-    //TODO:
+  override func continueButtonTapped() {
+    viewModel.confirmPaymentMethod()
+  }
+  
+  private func navigateToCardIssuers() {
+    AppNavigator.shared.navigate(to: HomeRoutes.cardIssuers, with: .push)
   }
 }

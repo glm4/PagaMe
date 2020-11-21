@@ -12,6 +12,7 @@ import UIKit
 enum HomeRoutes: Route {
   case home
   case paymentMethods
+  case cardIssuers
 
   var screen: UIViewController {
     switch self {
@@ -20,6 +21,9 @@ enum HomeRoutes: Route {
       
     case .paymentMethods:
       return paymentMethodsController()
+      
+    case .cardIssuers:
+      return cardIssuersController()
     }
   }
   
@@ -48,5 +52,18 @@ enum HomeRoutes: Route {
     
     paymentMethodsVC.viewModel = PaymentMethodsViewModel()
     return paymentMethodsVC
+  }
+  
+  private func cardIssuersController() -> UIViewController {
+    guard
+      let issuersVC = UIStoryboard.issuers.instantiateViewController(
+        withIdentifier: IssuersViewController.identifier
+      ) as? IssuersViewController
+    else {
+      fatalError("IssuersViewController could not be instantiated.")
+    }
+    
+    issuersVC.viewModel = CardIssuersViewModel()
+    return issuersVC
   }
 }

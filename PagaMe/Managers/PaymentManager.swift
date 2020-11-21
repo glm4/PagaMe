@@ -52,18 +52,35 @@ internal final class PaymentManager {
     statusRelay.asDriver()
   }
   
-//  private var payment
+  private var order = PaymentOrder()
   
   // MARK: - Public API
+  
+  var orderAmount: Decimal? {
+    order.amount
+  }
+  
+  var orderPaymentMethod: PaymentMethod? {
+    order.paymentMethod
+  }
+  
+  var orderIssuer: Issuer? {
+    order.issuer
+  }
 
   func setAmount(amount: Double) {
-    //Payment.amount= amount
+    order.amount = Decimal(amount)
     statusRelay.accept(.amount)
   }
   
   func setPaymentMethod(paymentMethod: PaymentMethod) {
-    //Payment.method = paymentMethod
+    order.paymentMethod = paymentMethod
     statusRelay.accept(.paymentMethod)
+  }
+  
+  func setIssuer(issuer: Issuer) {
+    order.issuer = issuer
+    statusRelay.accept(.issuer)
   }
   
 }

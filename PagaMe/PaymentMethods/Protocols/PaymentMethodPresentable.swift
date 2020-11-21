@@ -8,22 +8,30 @@
 
 import Foundation
 
-protocol PaymentMethodPresentable {
+protocol PaymentMethodPresentable: CellDetailPresentable {
   
-  var headline: String { get }
-  var subHeadline: String { get }
+  var paymentMethodName: String { get }
+  var paymentMethodType: String { get }
   var thumbnailURL: URL? { get }
   
 }
 
 extension PaymentMethod: PaymentMethodPresentable {
   
-  var headline: String {
+  var paymentMethodName: String {
     name
   }
   
-  var subHeadline: String {
+  var paymentMethodType: String {
     paymentTypeId.replacingOccurrences(of: "_", with: " ").capitalized
+  }
+  
+  var headline: String {
+    paymentMethodName
+  }
+  
+  var subHeadline: String {
+    paymentMethodType
   }
   
   var thumbnailURL: URL? {
