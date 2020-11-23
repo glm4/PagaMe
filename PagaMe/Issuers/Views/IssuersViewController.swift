@@ -83,7 +83,7 @@ class IssuersViewController: ListViewController {
   }
   
   func navigateToInstallments() {
-    //TODO
+    AppNavigator.shared.navigate(to: HomeRoutes.installments, with: .push)
   }
   
 }

@@ -31,6 +31,14 @@
 		9B24F663256980D600DB5176 /* DetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B24F662256980D600DB5176 /* DetailsViewCell.swift */; };
 		9B24F6652569814900DB5176 /* CellDetailPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B24F6642569814900DB5176 /* CellDetailPresentable.swift */; };
 		9B24F667256984C600DB5176 /* IssuerDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B24F666256984C600DB5176 /* IssuerDetailViewCell.swift */; };
+		9B24F66F25698AB400DB5176 /* Installment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B24F66E25698AB400DB5176 /* Installment.swift */; };
+		9B24F6712569944700DB5176 /* Installment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B24F6702569944700DB5176 /* Installment.storyboard */; };
+		9B24F6732569948900DB5176 /* InstallmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B24F6722569948900DB5176 /* InstallmentsViewController.swift */; };
+		9B24F675256994C900DB5176 /* InstallmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B24F674256994C900DB5176 /* InstallmentsViewModel.swift */; };
+		9B24F6792569956A00DB5176 /* InstallmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B24F6772569956A00DB5176 /* InstallmentTableViewCell.swift */; };
+		9B24F67A2569956A00DB5176 /* InstallmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B24F6782569956A00DB5176 /* InstallmentTableViewCell.xib */; };
+		9B24F67C2569961300DB5176 /* InstallmentPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B24F67B2569961300DB5176 /* InstallmentPresentable.swift */; };
+		9B24F67F256998CA00DB5176 /* InstallmentSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B24F67E256998CA00DB5176 /* InstallmentSectionHeaderView.swift */; };
 		9B3AA3A11ED4D014005A4D26 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3AA3A01ED4D014005A4D26 /* HomeViewController.swift */; };
 		9B409E542567233B004131EB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B409E532567233B004131EB /* UIColorExtension.swift */; };
 		9B409E5625672434004131EB /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B409E5525672434004131EB /* UIFontExtension.swift */; };
@@ -131,6 +139,14 @@
 		9B24F662256980D600DB5176 /* DetailsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewCell.swift; sourceTree = "<group>"; };
 		9B24F6642569814900DB5176 /* CellDetailPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetailPresentable.swift; sourceTree = "<group>"; };
 		9B24F666256984C600DB5176 /* IssuerDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuerDetailViewCell.swift; sourceTree = "<group>"; };
+		9B24F66E25698AB400DB5176 /* Installment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Installment.swift; sourceTree = "<group>"; };
+		9B24F6702569944700DB5176 /* Installment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Installment.storyboard; sourceTree = "<group>"; };
+		9B24F6722569948900DB5176 /* InstallmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentsViewController.swift; sourceTree = "<group>"; };
+		9B24F674256994C900DB5176 /* InstallmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentsViewModel.swift; sourceTree = "<group>"; };
+		9B24F6772569956A00DB5176 /* InstallmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentTableViewCell.swift; sourceTree = "<group>"; };
+		9B24F6782569956A00DB5176 /* InstallmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstallmentTableViewCell.xib; sourceTree = "<group>"; };
+		9B24F67B2569961300DB5176 /* InstallmentPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentPresentable.swift; sourceTree = "<group>"; };
+		9B24F67E256998CA00DB5176 /* InstallmentSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentSectionHeaderView.swift; sourceTree = "<group>"; };
 		9B3AA3A01ED4D014005A4D26 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9B409E532567233B004131EB /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		9B409E5525672434004131EB /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
@@ -319,6 +335,7 @@
 		9B0C72511C738C3100BAF3B1 /* PagaMe */ = {
 			isa = PBXGroup;
 			children = (
+				9B24F66825698A7D00DB5176 /* Installments */,
 				9BB47CBD25696FC6004E1C99 /* Issuers */,
 				9B409E6E25687F1A004131EB /* PaymentMethods */,
 				078642F222E6691B0027BF11 /* Common */,
@@ -353,6 +370,77 @@
 				9B24F662256980D600DB5176 /* DetailsViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9B24F66825698A7D00DB5176 /* Installments */ = {
+			isa = PBXGroup;
+			children = (
+				9B24F66D25698AA700DB5176 /* Model */,
+				9B24F66C25698A9C00DB5176 /* Storyboards */,
+				9B24F66B25698A9300DB5176 /* Protocols */,
+				9B24F66A25698A8D00DB5176 /* Views */,
+				9B24F66925698A8800DB5176 /* ViewModel */,
+			);
+			path = Installments;
+			sourceTree = "<group>";
+		};
+		9B24F66925698A8800DB5176 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9B24F674256994C900DB5176 /* InstallmentsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9B24F66A25698A8D00DB5176 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9B24F67D2569985300DB5176 /* ResuableViews */,
+				9B24F6762569952300DB5176 /* Cells */,
+				9B24F6722569948900DB5176 /* InstallmentsViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9B24F66B25698A9300DB5176 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9B24F67B2569961300DB5176 /* InstallmentPresentable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		9B24F66C25698A9C00DB5176 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				9B24F6702569944700DB5176 /* Installment.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		9B24F66D25698AA700DB5176 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9B24F66E25698AB400DB5176 /* Installment.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9B24F6762569952300DB5176 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9B24F6772569956A00DB5176 /* InstallmentTableViewCell.swift */,
+				9B24F6782569956A00DB5176 /* InstallmentTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		9B24F67D2569985300DB5176 /* ResuableViews */ = {
+			isa = PBXGroup;
+			children = (
+				9B24F67E256998CA00DB5176 /* InstallmentSectionHeaderView.swift */,
+			);
+			path = ResuableViews;
 			sourceTree = "<group>";
 		};
 		9B409E69256873E2004131EB /* Types */ = {
@@ -762,8 +850,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B24F6712569944700DB5176 /* Installment.storyboard in Resources */,
 				0ABFB8901FA366D90098F751 /* Main.storyboard in Resources */,
 				9BFA84F31C776827009F64E4 /* LaunchScreen.storyboard in Resources */,
+				9B24F67A2569956A00DB5176 /* InstallmentTableViewCell.xib in Resources */,
 				9BB47CCB25697181004E1C99 /* Issuers.storyboard in Resources */,
 				9B409E7325687F45004131EB /* PaymentMethods.storyboard in Resources */,
 				9B8D306B20AB456C0050697F /* Localizable.strings in Resources */,
@@ -923,11 +1013,14 @@
 				FE4D636022B2CB3800685161 /* HomeRoutes.swift in Sources */,
 				9B3AA3A11ED4D014005A4D26 /* HomeViewController.swift in Sources */,
 				9BB47CC6256970F4004E1C99 /* CardIssuerPresentable.swift in Sources */,
+				9B24F66F25698AB400DB5176 /* Installment.swift in Sources */,
 				9BD01E361F01641E007255E3 /* DictionaryExtension.swift in Sources */,
 				E8290C021D8330A800599960 /* StringExtension.swift in Sources */,
 				9B8D307020AB47E90050697F /* JSONEncodingExtension.swift in Sources */,
+				9B24F6792569956A00DB5176 /* InstallmentTableViewCell.swift in Sources */,
 				9B24F65D256978F700DB5176 /* CardIssuersViewModel.swift in Sources */,
 				9BB47CAF25688120004E1C99 /* StoryboardIdentificable.swift in Sources */,
+				9B24F6732569948900DB5176 /* InstallmentsViewController.swift in Sources */,
 				9B409E542567233B004131EB /* UIColorExtension.swift in Sources */,
 				9BB47CCE25697234004E1C99 /* ListViewController.swift in Sources */,
 				9B409E6425686E47004131EB /* PaymentFlowManageable.swift in Sources */,
@@ -939,12 +1032,15 @@
 				9BB47CB825695F49004E1C99 /* PaymentMethodViewCell.swift in Sources */,
 				9B409E5625672434004131EB /* UIFontExtension.swift in Sources */,
 				FABDC9221EE1EB2B000DDAC3 /* ConfigurationManager.swift in Sources */,
+				9B24F67C2569961300DB5176 /* InstallmentPresentable.swift in Sources */,
 				9B24F667256984C600DB5176 /* IssuerDetailViewCell.swift in Sources */,
 				9B409E6625686F43004131EB /* CurrencyPresenter.swift in Sources */,
 				9B5EAB4A232C146D00B9CE3C /* TextFieldExtension.swift in Sources */,
 				9B409E7525687FE2004131EB /* PaymentMethodsController.swift in Sources */,
 				9B24F66025697C3500DB5176 /* PaymentOrder.swift in Sources */,
 				9B0C72711C738D3400BAF3B1 /* AppDelegate.swift in Sources */,
+				9B24F675256994C900DB5176 /* InstallmentsViewModel.swift in Sources */,
+				9B24F67F256998CA00DB5176 /* InstallmentSectionHeaderView.swift in Sources */,
 				FE4D635C22B2C75400685161 /* Navigator.swift in Sources */,
 				FE4D635E22B2CAFF00685161 /* AppNavigator.swift in Sources */,
 				9BB47CB125688781004E1C99 /* PaymentMethodsViewModel.swift in Sources */,

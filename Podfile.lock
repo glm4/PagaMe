@@ -16,8 +16,8 @@ DEPENDENCIES:
   - Alamofire (~> 5.2.0)
   - IQKeyboardManagerSwift (~> 6.1.1)
   - Kingfisher (~> 5.0)
-  - RxCocoa (= 6.0.0-rc.1)
-  - RxSwift (= 6.0.0-rc.1)
+  - RxCocoa (~> 6.0.0-rc.1)
+  - RxSwift (~> 6.0.0-rc.1)
   - Swifter (~> 1.4.7)
 
 SPEC REPOS:
@@ -39,6 +39,6 @@ SPEC CHECKSUMS:
   RxSwift: dae1a32c48148897494b9e2a6b00a68b40694236
   Swifter: 2327ef5d872c638aebab79646ce494af508b0c8f
 
-PODFILE CHECKSUM: 5b4ee68ad9b4fd03e3e415c130d6901c937b02d1
+PODFILE CHECKSUM: 435de0bae8e40854859587e5f3ca89a3f784c942
 
 COCOAPODS: 1.9.3

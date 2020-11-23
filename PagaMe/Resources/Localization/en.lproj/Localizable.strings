@@ -17,3 +17,8 @@
 
 //Issuers
 "issuers.instructions" = "Select your card provider";
+
+//Installments
+"installments.instructions" = "Select the installments for this transaction";
+"installment_option.installment_count" = "Installments:";
+"installment_option.total_amount" = "Total amount:";

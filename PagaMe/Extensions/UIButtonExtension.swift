@@ -11,8 +11,9 @@ import UIKit
 extension UIButton {
   
   func applyDefaultStyle() {
-    titleLabel?.font = .defaultRegular
+    titleLabel?.font = .defaultSemibold
+    
     setRoundBorders(AtomicLayout.defaultCornerRadius)
-    backgroundColor = .body
+    backgroundColor = .brand
   }
 }

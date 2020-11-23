@@ -18,3 +18,8 @@
 
 //Issuers
 "issuers.instructions" = "Seleccione el proveedor de su tarjeta";
+
+//Installments
+"installments.instructions" = "Seleccione el modo de pago para esta transacción";
+"installment_option.installment_count" = "Cuotas:";
+"installment_option.total_amount" = "Total:";

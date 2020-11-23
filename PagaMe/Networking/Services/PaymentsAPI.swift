@@ -12,6 +12,9 @@ class PaymentsAPI {
   
   private static let paymentsPath = "/payment_methods"
   private static let issuersPath = "\(paymentsPath)/card_issuers"
+  private static let installmentsPath = "\(paymentsPath)/installments"
+  
+  // MARK: - Payment Methods
   
   class func getPaymentMethods(
     success: @escaping (_ paymentMethods: [PaymentMethod]) -> Void,
@@ -40,6 +43,8 @@ class PaymentsAPI {
     )
   }
   
+  // MARK: - Issuers
+  
   class func getIssuers(
     paymentMethodId: String,
     success: @escaping (_ issuers: [Issuer]) -> Void,
@@ -64,6 +69,45 @@ class PaymentsAPI {
         }
         
         success(cardIssuers)
+      },
+      failure: failure
+    )
+  }
+  
+  // MARK: - Installments
+  
+  class func getInstallemnts(
+    paymentMethodId: String,
+    issuerId: String,
+    amount: Decimal,
+    success: @escaping (_ installments: [Installment]) -> Void,
+    failure: @escaping (_ error: Error) -> Void
+  ) {
+    
+    let requestParams = [
+      "payment_method_id": paymentMethodId,
+      "issuer.id": issuerId,
+      "amount": "\(amount)"
+    ]
+    APIClient.request(
+      .get,
+      url: installmentsPath,
+      params: requestParams,
+      success: { response, _ in
+        guard
+          let installments = try? JSONDecoder.defaultDecoder.decode(
+            [Installment].self,
+            from: response
+          )
+        else {
+          failure(App.error(
+            domain: .parsing,
+            localizedDescription: "Could not parse a valid Installment".localized
+          ))
+          return
+        }
+        
+        success(installments)
       },
       failure: failure
     )

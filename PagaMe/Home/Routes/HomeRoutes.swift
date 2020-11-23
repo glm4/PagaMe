@@ -13,17 +13,18 @@ enum HomeRoutes: Route {
   case home
   case paymentMethods
   case cardIssuers
-
+  case installments
+  
   var screen: UIViewController {
     switch self {
     case .home:
       return homeViewController()
-      
     case .paymentMethods:
       return paymentMethodsController()
-      
     case .cardIssuers:
       return cardIssuersController()
+    case .installments:
+      return installmentsController()
     }
   }
   
@@ -31,7 +32,8 @@ enum HomeRoutes: Route {
   
   private func homeViewController() -> UIViewController {
     guard
-      let navVC = UIStoryboard.main.instantiateInitialViewController() as? UINavigationController,
+      let navVC = UIStoryboard.main
+        .instantiateInitialViewController() as? UINavigationController,
       let homeVC = navVC.viewControllers.first as? HomeViewController
     else {
       fatalError("HomeViewController could not be instantiated.")
@@ -64,6 +66,19 @@ enum HomeRoutes: Route {
     }
     
     issuersVC.viewModel = CardIssuersViewModel()
+    return issuersVC
+  }
+  
+  private func installmentsController() -> UIViewController {
+    guard
+      let issuersVC = UIStoryboard.installment.instantiateViewController(
+        withIdentifier: InstallmentsViewController.identifier
+      ) as? InstallmentsViewController
+    else {
+      fatalError("InstallmentsViewController could not be instantiated.")
+    }
+    
+    issuersVC.viewModel = InstallmentsViewModel()
     return issuersVC
   }
 }

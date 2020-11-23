@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailsViewCell: UITableViewCell {
 
@@ -52,7 +53,7 @@ class DetailsViewCell: UITableViewCell {
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
     
-    contentView.addBorder(color: selected ? .brand : .clear, weight: 2)
+    contentView.addBorder(color: .brand, weight: selected ? 2 : 0)
   }
   
   // MARK: - Public API

@@ -24,7 +24,7 @@ internal protocol ContinueButtonPresentable: RxDisposable {
 extension ContinueButtonPresentable where Self: UIViewController {
   
   var buttonTitle: String {
-    "continue_button.default".localized
+    "continue_button.default".localized.uppercased()
   }
   
   func setupButtonLayoutConstraints() {
@@ -64,7 +64,7 @@ extension ContinueButtonPresentable where Self: UIViewController {
   }
   
   func stylizeContinueButton() {
-    continueButton.setTitleColor(.brand, for: .normal)
+    continueButton.setTitleColor(.body, for: .normal)
     continueButton.setTitle(buttonTitle, for: .normal)
     
     continueButton.applyDefaultStyle()

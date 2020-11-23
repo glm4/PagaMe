@@ -4,9 +4,11 @@ inhibit_all_warnings!
 
 target 'PagaMe' do
   pod 'Alamofire', '~> 5.2.0'
+  
+  pod 'RxSwift', '~> 6.0.0-rc.1'
+  pod 'RxCocoa', '~> 6.0.0-rc.1'
+  
   pod 'IQKeyboardManagerSwift', '~> 6.1.1'
-  pod 'RxSwift', '6.0.0-rc.1'
-  pod 'RxCocoa', '6.0.0-rc.1'
   pod 'Kingfisher', '~> 5.0'
   
   target 'PagaMeUITests' do

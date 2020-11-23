@@ -79,24 +79,6 @@ internal class APIClient {
     )
     
     let request = AF.request(requestConvertible)
-//    request.responseString { (response) in
-//      switch response.result {
-//      case .success(let string):
-//        print(string)
-//      case .failure(let error):
-//        print(error)
-//      }
-//
-//    }
-    
-//    request.responseJSON { response in
-//      switch response.result {
-//      case .success(let dict):
-//        print(dict)
-//      case .failure(let error):
-//        print(error)
-//      }
-//    }
 
     request.responseJSON(
       completionHandler: { result in
