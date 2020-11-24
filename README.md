@@ -3,6 +3,17 @@
 # PagaMe
 Demo App using MercadoPago API. 
 
+## Usage
+
+1 - Install dependencies:
+
+```
+   pod install
+```
+
+2 - Run the project in a simulator
+
+
 ## License
 
 PagaMe is available under the MIT license. See the LICENSE file for more info.
