@@ -80,6 +80,10 @@ internal final class PaymentMethodsController: ListViewController {
   }
   
   private func navigateToCardIssuers() {
+    /// Ideally when you select a payment method you would ask for other details.
+    /// The information needed is available in the `additional_info_needed` field.
+    /// I consider this is not part of the scope of this demo app and most of
+    /// the Mercadopago Front-End SDKs have this built-in.
     AppNavigator.shared.navigate(to: HomeRoutes.cardIssuers, with: .push)
   }
 }
