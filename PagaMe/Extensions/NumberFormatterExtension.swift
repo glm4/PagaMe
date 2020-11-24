@@ -18,9 +18,11 @@ extension NumberFormatter {
     formatter.maximum = NSNumber(value: Currency.maximumPayment)
     
     formatter.decimalSeparator = Currency.decimalSeparator
+    formatter.generatesDecimalNumbers = true
     formatter.alwaysShowsDecimalSeparator = false
     formatter.usesGroupingSeparator = false
     formatter.maximumFractionDigits = 2
+    formatter.minimumFractionDigits = 0
     
     return formatter
   }()
@@ -34,9 +36,11 @@ extension NumberFormatter {
     
     formatter.currencySymbol = Currency.current
     formatter.currencyDecimalSeparator = Currency.decimalSeparator
+    formatter.generatesDecimalNumbers = true
     formatter.alwaysShowsDecimalSeparator = false
     formatter.usesGroupingSeparator = false
     formatter.maximumFractionDigits = 2
+    formatter.minimumFractionDigits = 0
     
     return formatter
   }()

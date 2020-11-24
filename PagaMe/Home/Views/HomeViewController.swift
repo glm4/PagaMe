@@ -132,25 +132,22 @@ extension HomeViewController: UITextFieldDelegate {
     shouldChangeCharactersIn range: NSRange,
     replacementString string: String
   ) -> Bool {
-    if string.isEmpty {
-      return true
-    }
-    
-    if string == viewModel.currencyDecimalSeparator {
-      return !(textField.text?.contains(viewModel.currencyDecimalSeparator) ?? false) &&
-        (textField.text?.contains(viewModel.currencySymbol) ?? false)
-    }
-    
-    if string == viewModel.currencySymbol {
-      return !(textField.text?.contains(viewModel.currencySymbol) ?? false)
-    }
-    
-    guard string.hasNumbers else { return false }
     
     let nsString = NSString(string: textField.text ?? "")
     let finalInput = nsString.replacingCharacters(in: range, with: string)
     
-    viewModel.amountInputChange(with: finalInput)
+    let numberOnly = finalInput.replacingOccurrences(
+      of: viewModel.currencySymbol,
+      with: ""
+    )
+    
+    viewModel.amountInputChange(with: numberOnly)
+    
+    // Allows to type in the decimal separator even when the number formatting
+    // is parsing to an Integer
+    if string == viewModel.currencyDecimalSeparator {
+      return true
+    }
     
     return false
   }

@@ -12,51 +12,46 @@ import RxCocoa
 
 class HomeViewModel: CurrencyPresenter, PaymentFlowManageable {
   
-  private let formatter = NumberFormatter()
-  
   var formattedAmountDriver: Driver<String> {
     amountRelay.map({ [weak self] value in
-      self?.formatter.string(from: NSNumber(value: value)) ?? ""
+      self?.currencyFormatter.string(from: value) ?? ""
     }).asDriver(onErrorJustReturn: "")
-  }
-  
-  var amountDriver: Driver<Double> {
-    amountRelay.asDriver()
   }
   
   var validAmountDriver: Driver<Bool> {
     amountRelay.map({
-      $0 >= Currency.minimumPayment && $0 <= Currency.maximumPayment
+      $0.doubleValue >= Currency.minimumPayment &&
+        $0.doubleValue <= Currency.maximumPayment
     }).asDriver(onErrorJustReturn: false)
   }
   
-  private let amountRelay: BehaviorRelay<Double> = BehaviorRelay<Double>(
+  private let amountRelay: BehaviorRelay<NSNumber> = BehaviorRelay<NSNumber>(
     value: 0
   )
   
-  init() {
-    formatter.numberStyle = .currency
-    formatter.locale = Locale.current
-    formatter.maximum = NSNumber(value: Currency.maximumPayment)
-    
-    formatter.currencySymbol = Currency.current
-    formatter.currencyDecimalSeparator = Currency.decimalSeparator
-    formatter.alwaysShowsDecimalSeparator = false
-    formatter.usesGroupingSeparator = false
-    formatter.maximumFractionDigits = 2
+  private var numberFormatter: NumberFormatter {
+    NumberFormatter.defaultFormatter
+  }
+  
+  private var currencyFormatter: NumberFormatter {
+    NumberFormatter.currencyFormatter
   }
   
   // MARK: - Public API
   
   func amountInputChange(with text: String) {
-    guard let number = formatter.number(from: text) else {
+    guard let number = numberFormatter.number(from: text) else {
+      if text.isEmpty {
+        amountRelay.accept(0)
+      }
       return
     }
-    amountRelay.accept(number.doubleValue)
+    
+    amountRelay.accept(number)
   }
   
   func confirmedAmount() {
-    paymentManager.setAmount(amount: amountRelay.value)
+    paymentManager.setAmount(amount: amountRelay.value.doubleValue)
   }
 
 }
