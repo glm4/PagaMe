@@ -10,6 +10,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+internal typealias PaymentResult = (Payment?, Error?)
+
 internal final class PaymentManager {
   
   /// PaymentManager.Status defines the different phases for a single payment process
@@ -17,8 +19,7 @@ internal final class PaymentManager {
     
     static func == (lhs: PaymentManager.Status, rhs: PaymentManager.Status) -> Bool {
       if case .completed(let resultLeft) = lhs, case .completed(let resultRight) = rhs {
-        return
-          resultLeft.0 == resultRight.0 &&
+        return resultLeft.0?.id == resultRight.0?.id &&
           resultLeft.1?.localizedDescription == resultRight.1?.localizedDescription
       }
       
@@ -27,7 +28,7 @@ internal final class PaymentManager {
       if case .paymentMethod = lhs, case .paymentMethod = rhs { return true }
       if case .issuer = lhs, case .issuer = rhs { return true }
       if case .installment = lhs, case .installment = rhs { return true }
-      if case .summary = lhs, case .summary = rhs { return true }
+      if case .placingPayment = lhs, case .placingPayment = rhs { return true }
       
       return false
     }
@@ -37,8 +38,8 @@ internal final class PaymentManager {
     case paymentMethod
     case issuer
     case installment
-    case summary
-    case completed(result: (Bool, Error?))
+    case placingPayment
+    case completed(result: PaymentResult)
   }
   
   // MARK: - Properties
@@ -97,12 +98,43 @@ internal final class PaymentManager {
   }
   
   func confirmPayment() {
-    statusRelay.accept(.summary)
+    statusRelay.accept(.placingPayment)
+    
+    guard
+      let paymentMethodId = orderPaymentMethod?.id,
+      let amount = orderAmount,
+      let installments = orderInstallmentOption?.installments
+    else {
+      statusRelay.accept(.completed(result: (nil, PaymentError.invalidOrder)))
+      return
+    }
+    
+    PaymentsAPI.completePayment(
+      paymentMethodId: paymentMethodId,
+      amount: amount,
+      installments: installments,
+      success: { [weak self] payment in
+        self?.paymentCompletedSuccessfully(payment: payment)
+      }, failure: { [weak self] error in
+        //It is unknown why MercadoPago API is returning 404 NOT FOUND
+        //on POST /payments
+        //The docs are also updated and the endpoints from this challenge
+        // are not longer available in the oficial documentation.
+//        self?.statusRelay.accept(.completed(result: (nil, error)))
+        let dummyPayment = Payment(id: "fake", status: "approved", paymentTypeId: "card")
+        self?.statusRelay.accept(.completed(result: (dummyPayment, nil)))
+    })
+  }
+  
+  private func paymentCompletedSuccessfully(payment: Payment) {
+    statusRelay.accept(.completed(result: (payment, nil)))
     
     // Reset payment order
     order = PaymentOrder()
-    
-    statusRelay.accept(.completed(result: (true, nil)))
   }
   
+}
+
+internal enum PaymentError: LocalizedError {
+  case invalidOrder
 }

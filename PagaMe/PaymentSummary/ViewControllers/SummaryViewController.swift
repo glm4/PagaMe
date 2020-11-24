@@ -17,6 +17,10 @@ class SummaryViewController: ListViewController {
   override var instructionsLocalizationKey: String {
     "summary.headline"
   }
+  
+  override var statusDriver: Driver<NetworkStatus> {
+    viewModel.statusDriver
+  }
 
   // MARK: - UI
 
@@ -64,16 +68,24 @@ class SummaryViewController: ListViewController {
 
     viewModel.paymentStatusDriver
       .filter { status in
-        if case .completed(let result) = status {
-          return result.0 && result.1 == nil
+        if case .completed = status {
+          return true
         }
         
         return false
       }
       .asObservable()
-      .subscribe(onNext: {[weak self] _ in
+      .subscribe(onNext: {[weak self] status in
         
-      self?.proceedToConfirmPayment()
+        if
+          case .completed(let result) = status,
+          result.0 != nil && result.1 == nil
+        {
+          self?.proceedToConfirmPayment()
+        } else {
+          self?.showPaymentErrorMessage()
+        }
+      
     }).disposed(by: disposeBag)
     
   }
@@ -84,6 +96,13 @@ class SummaryViewController: ListViewController {
   
   override func continueButtonTapped() {
     viewModel.confirmPayment()
+  }
+  
+  private func showPaymentErrorMessage() {
+    showMessage(
+      title: "error.default_title".localized,
+      message: "error.payment_error".localized
+    )
   }
 
 }

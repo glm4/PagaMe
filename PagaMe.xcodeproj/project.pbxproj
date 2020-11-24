@@ -59,6 +59,7 @@
 		9B409E7725687FF5004131EB /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B409E7625687FF5004131EB /* StoryboardExtension.swift */; };
 		9B40C715256C91DA0091DFB8 /* NumberFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B40C714256C91DA0091DFB8 /* NumberFormatterExtension.swift */; };
 		9B40C718256C9A100091DFB8 /* SuccessfulPaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B40C717256C9A100091DFB8 /* SuccessfulPaymentController.swift */; };
+		9B40C71B256CA4400091DFB8 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B40C71A256CA43F0091DFB8 /* Payment.swift */; };
 		9B5E1438245B2AA00059DF62 /* UserServiceUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5E1437245B2AA00059DF62 /* UserServiceUnitTests.swift */; };
 		9B5E1443245B50630059DF62 /* StringExtensionUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5E1442245B50630059DF62 /* StringExtensionUnitTests.swift */; };
 		9B5EAB4A232C146D00B9CE3C /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5EAB49232C146D00B9CE3C /* TextFieldExtension.swift */; };
@@ -174,6 +175,7 @@
 		9B409E7625687FF5004131EB /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		9B40C714256C91DA0091DFB8 /* NumberFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterExtension.swift; sourceTree = "<group>"; };
 		9B40C717256C9A100091DFB8 /* SuccessfulPaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulPaymentController.swift; sourceTree = "<group>"; };
+		9B40C71A256CA43F0091DFB8 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		9B5AFADA1C7205EC002347D6 /* PagaMe-Debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PagaMe-Debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5E1435245B2AA00059DF62 /* PagaMeUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PagaMeUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5E1437245B2AA00059DF62 /* UserServiceUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceUnitTests.swift; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 		9B24F680256C721700DB5176 /* PaymentSummary */ = {
 			isa = PBXGroup;
 			children = (
+				9B40C719256CA4310091DFB8 /* Model */,
 				9B24F68F256C899B00DB5176 /* Views */,
 				9B24F68A256C7BF900DB5176 /* Protocols */,
 				9B24F683256C723400DB5176 /* Storyboard */,
@@ -555,6 +558,14 @@
 				9BB47CB025688781004E1C99 /* PaymentMethodsViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9B40C719256CA4310091DFB8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9B40C71A256CA43F0091DFB8 /* Payment.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9B5AFAD11C7205EB002347D6 = {
@@ -1093,6 +1104,7 @@
 				9BB47CAF25688120004E1C99 /* StoryboardIdentificable.swift in Sources */,
 				9B24F6732569948900DB5176 /* InstallmentsViewController.swift in Sources */,
 				9B409E542567233B004131EB /* UIColorExtension.swift in Sources */,
+				9B40C71B256CA4400091DFB8 /* Payment.swift in Sources */,
 				9BB47CCE25697234004E1C99 /* ListViewController.swift in Sources */,
 				9B409E6425686E47004131EB /* PaymentFlowManageable.swift in Sources */,
 				9B40C718256C9A100091DFB8 /* SuccessfulPaymentController.swift in Sources */,

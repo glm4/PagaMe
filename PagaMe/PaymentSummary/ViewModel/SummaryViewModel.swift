@@ -31,8 +31,24 @@ class SummaryViewModel: PaymentFlowManageable, NetworkActivityStatus {
   
   var statusRelay = BehaviorRelay<NetworkStatus>(value: .idle)
   
+  private var disposeBag = DisposeBag()
+  
   var validOrderDriver: Driver<Bool> {
     Driver.just(paymentManager.validOrder)
+  }
+  
+  init() {
+    paymentManager.statusDriver.asObservable()
+      .subscribe(onNext: { [weak self] status in
+        if status == .placingPayment {
+          self?.statusRelay.accept(.loading)
+        }
+        
+        guard case .completed(let result) = status else { return }
+        
+        let success = result.0 != nil && result.1 == nil
+        self?.statusRelay.accept(success ? .idle : .failed)
+      }).disposed(by: disposeBag)
   }
   
   // MARK: - Public API

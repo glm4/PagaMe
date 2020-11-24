@@ -37,3 +37,7 @@
 
 "success.go_back" = "Terminar";
 "success.payment_done" = "Pago Realizado!";
+
+// Error
+"error.default_title" = "Oh no!";
+"error.payment_error" = "Pago fallido. Por favor intente nuevamente mas tarde.";

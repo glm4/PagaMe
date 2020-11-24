@@ -112,4 +112,40 @@ class PaymentsAPI {
       failure: failure
     )
   }
+  
+  class func completePayment(
+    paymentMethodId: String,
+    amount: Decimal,
+    installments: Int,
+    success: @escaping (_ payment: Payment) -> Void,
+    failure: @escaping (_ error: Error) -> Void
+  ) {
+    let requestParams: [String: Any] = [
+      "installments": installments,
+      "payment_method_id": paymentMethodId,
+      "amount": "\(amount)"
+    ]
+    APIClient.request(
+      .post,
+      url: paymentsPath,
+      params: requestParams,
+      success: { response, _ in
+        guard
+          let payment = try? JSONDecoder.defaultDecoder.decode(
+            Payment.self,
+            from: response
+          )
+        else {
+          failure(App.error(
+            domain: .parsing,
+            localizedDescription: "Could not parse a valid Payment".localized
+          ))
+          return
+        }
+        
+        success(payment)
+      },
+      failure: failure
+    )
+  }
 }

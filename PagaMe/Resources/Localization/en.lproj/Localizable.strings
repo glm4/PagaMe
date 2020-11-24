@@ -33,6 +33,9 @@
 "summary.amount_header" = "Total";
 
 // Success
-
 "success.go_back" = "OK, cool!";
 "success.payment_done" = "Payment Done!";
+
+// Error
+"error.default_title" = "Oops!";
+"error.payment_error" = "Payment failed. Please try again later or contact your provider";
