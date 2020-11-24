@@ -13,5 +13,13 @@ struct PaymentOrder {
   var amount: Decimal?
   var paymentMethod: PaymentMethod?
   var issuer: Issuer?
+  var installmentOption: PayerCost?
+  
+  var validOrder: Bool {
+    amount != nil &&
+      paymentMethod != nil &&
+      issuer != nil &&
+      installmentOption != nil
+  }
   
 }

@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class InstallmentsViewController: ListViewController {
+internal final class InstallmentsViewController: ListViewController {
   
   // MARK: - Properties
   
@@ -87,11 +87,11 @@ class InstallmentsViewController: ListViewController {
   }
   
   override func continueButtonTapped() {
-//    viewModel.confirmIssuer()
+    viewModel.confirmInstallment()
   }
   
   func navigateConfirmation() {
-    //TODO
+    AppNavigator.shared.navigate(to: HomeRoutes.summary, with: .push)
   }
 
 }

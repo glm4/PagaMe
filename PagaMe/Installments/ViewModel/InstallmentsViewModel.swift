@@ -74,7 +74,9 @@ class InstallmentsViewModel: PaymentFlowManageable, NetworkActivityStatus {
     installment(at: index)?.payerCosts.count ?? 0
   }
   
-  func installmentOptionPresentable(at indexPath: IndexPath) -> InstallmentPayerCostPresentable? {
+  func installmentOptionPresentable(
+    at indexPath: IndexPath
+  ) -> InstallmentPayerCostPresentable? {
     installmentOption(at: indexPath)
   }
   
@@ -105,6 +107,12 @@ class InstallmentsViewModel: PaymentFlowManageable, NetworkActivityStatus {
   
   func selectInstallment(at indexPath: IndexPath) {
     selectedPaymentOptionRelay.accept(installmentOption(at: indexPath))
+  }
+  
+  func confirmInstallment() {
+    guard let installmentOption = selectedPaymentOptionRelay.value else { return }
+    
+    paymentManager.setInstallmentOption(option: installmentOption)
   }
   
 }

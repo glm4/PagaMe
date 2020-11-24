@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PaymentMethodPresentable: CellDetailPresentable {
+protocol PaymentMethodPresentable: CellDetailPresentable, SummaryPresentable {
   
   var paymentMethodName: String { get }
   var paymentMethodType: String { get }

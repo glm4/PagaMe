@@ -15,6 +15,8 @@ internal class ListViewController: UIViewController,
   
   private(set) var disposeBag = DisposeBag()
   
+  static let topConstraintIdentifier = "TopConstraintId"
+  
   lazy var activityIndicator: UIActivityIndicatorView = {
     let indicator = UIActivityIndicatorView()
     
@@ -100,11 +102,11 @@ internal class ListViewController: UIViewController,
       ),
       tableView.leadingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-        constant: -AtomicLayout.defaultMargins
+        constant: AtomicLayout.defaultMargins
       ),
       tableView.trailingAnchor.constraint(
         equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-        constant: AtomicLayout.defaultMargins
+        constant: -AtomicLayout.defaultMargins
       )
     ])
     

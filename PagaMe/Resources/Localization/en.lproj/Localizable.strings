@@ -22,3 +22,14 @@
 "installments.instructions" = "Select the installments for this transaction";
 "installment_option.installment_count" = "Installments:";
 "installment_option.total_amount" = "Total amount:";
+
+//Summary
+"summary.headline" = "Payment Summary";
+"summary.instructions" = "Please review your payment information";
+"summary.confirmation_button" = "Confirm Payment";
+"summary.payment_method_header" = "Payment Method";
+"summary.issuer_header" = "Issuer for the Payment Method";
+"summary.installment_header" = "Installment Costs";
+"summary.amount_header" = "Total";
+
+

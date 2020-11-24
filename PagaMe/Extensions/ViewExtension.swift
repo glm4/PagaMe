@@ -53,6 +53,21 @@ extension UIView {
       self?.layoutIfNeeded()
     })
   }
+  
+  // MARK: - Auto layout
+  
+  func embedInSuperView() {
+    guard let superV = superview else { return }
+    translatesAutoresizingMaskIntoConstraints = false
+    
+    NSLayoutConstraint.activate([
+      topAnchor.constraint(equalTo: superV.topAnchor),
+      leadingAnchor.constraint(equalTo: superV.leadingAnchor),
+      trailingAnchor.constraint(equalTo: superV.trailingAnchor),
+      bottomAnchor.constraint(equalTo: superV.bottomAnchor),
+    ])
+  }
+
 }
 
 extension Array where Element: UIView {

@@ -23,3 +23,12 @@
 "installments.instructions" = "Seleccione el modo de pago para esta transacción";
 "installment_option.installment_count" = "Cuotas:";
 "installment_option.total_amount" = "Total:";
+
+//Summary
+"summary.headline" = "Resumen de Pago";
+"summary.instructions" = "Por favor revise la información de su transferencia";
+"summary.confirmation_button" = "Confirmar Pago";
+"summary.payment_method_header" = "Método de Pago";
+"summary.issuer_header" = "Emisor de su tarjeta";
+"summary.installment_header" = "Cuotas y costos del pago";
+"summary.amount_header" = "Total";

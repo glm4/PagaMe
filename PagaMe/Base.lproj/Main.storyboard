@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMy-eR-RsW">
-                                <rect key="frame" x="32" y="72" width="162.5" height="76.5"/>
+                                <rect key="frame" x="16" y="72" width="162.5" height="76.5"/>
                                 <string key="text">Welcome to
 PagaMe</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
@@ -66,7 +66,7 @@ PagaMe</string>
                         <accessibility key="accessibilityConfiguration" identifier="StartView"/>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nMy-eR-RsW" secondAttribute="trailing" constant="20" symbolic="YES" id="A5X-Hs-TIn"/>
-                            <constraint firstItem="nMy-eR-RsW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="Gwo-18-Uld"/>
+                            <constraint firstItem="nMy-eR-RsW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="Gwo-18-Uld"/>
                             <constraint firstItem="nMy-eR-RsW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="72" id="QWv-2L-MoY"/>
                         </constraints>
                     </view>

@@ -54,6 +54,10 @@ internal final class PaymentManager {
   
   private var order = PaymentOrder()
   
+  var validOrder: Bool {
+    order.validOrder
+  }
+  
   // MARK: - Public API
   
   var orderAmount: Decimal? {
@@ -66,6 +70,10 @@ internal final class PaymentManager {
   
   var orderIssuer: Issuer? {
     order.issuer
+  }
+  
+  var orderInstallmentOption: PayerCost? {
+    order.installmentOption
   }
 
   func setAmount(amount: Double) {
@@ -81,6 +89,11 @@ internal final class PaymentManager {
   func setIssuer(issuer: Issuer) {
     order.issuer = issuer
     statusRelay.accept(.issuer)
+  }
+  
+  func setInstallmentOption(option: PayerCost) {
+    order.installmentOption = option
+    statusRelay.accept(.installment)
   }
   
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CardIssuerPresentable: CellDetailPresentable {
+protocol CardIssuerPresentable: CellDetailPresentable, SummaryPresentable {
   
   var issuerName: String { get }
   var thumbnailURL: URL? { get }

@@ -14,5 +14,6 @@ extension UIStoryboard {
   static let paymentMethods = UIStoryboard(name: "PaymentMethods", bundle: nil)
   static let issuers = UIStoryboard(name: "Issuers", bundle: nil)
   static let installment = UIStoryboard(name: "Installment", bundle: nil)
+  static let summary = UIStoryboard(name: "Summary", bundle: nil)
   
 }
