@@ -19,7 +19,7 @@ internal final class PaymentManager {
       if case .completed(let resultLeft) = lhs, case .completed(let resultRight) = rhs {
         return
           resultLeft.0 == resultRight.0 &&
-          resultLeft.1.localizedDescription == resultRight.1.localizedDescription
+          resultLeft.1?.localizedDescription == resultRight.1?.localizedDescription
       }
       
       if case .notStarted = lhs, case .notStarted = rhs { return true }
@@ -38,7 +38,7 @@ internal final class PaymentManager {
     case issuer
     case installment
     case summary
-    case completed(result: (Bool, Error))
+    case completed(result: (Bool, Error?))
   }
   
   // MARK: - Properties
@@ -94,6 +94,15 @@ internal final class PaymentManager {
   func setInstallmentOption(option: PayerCost) {
     order.installmentOption = option
     statusRelay.accept(.installment)
+  }
+  
+  func confirmPayment() {
+    statusRelay.accept(.summary)
+    
+    // Reset payment order
+    order = PaymentOrder()
+    
+    statusRelay.accept(.completed(result: (true, nil)))
   }
   
 }

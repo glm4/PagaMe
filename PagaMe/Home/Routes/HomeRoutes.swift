@@ -15,6 +15,7 @@ enum HomeRoutes: Route {
   case cardIssuers
   case installments
   case summary
+  case success
   
   var screen: UIViewController {
     switch self {
@@ -28,6 +29,8 @@ enum HomeRoutes: Route {
       return installmentsController()
     case .summary:
       return summaryViewController()
+    case .success:
+      return successViewController()
     }
   }
   
@@ -85,7 +88,7 @@ enum HomeRoutes: Route {
     return issuersVC
   }
   
-  func summaryViewController() -> UIViewController {
+  private func summaryViewController() -> UIViewController {
     guard
       let summaryVC = UIStoryboard.summary.instantiateViewController(
         withIdentifier: SummaryViewController.identifier
@@ -96,6 +99,18 @@ enum HomeRoutes: Route {
     
     summaryVC.viewModel = SummaryViewModel()
     return summaryVC
+  }
+  
+  private func successViewController() -> UIViewController {
+    guard
+      let successVC = UIStoryboard.summary.instantiateViewController(
+        withIdentifier: SuccessfulPaymentController.identifier
+      ) as? SuccessfulPaymentController
+    else {
+      fatalError("successViewController could not be instantiated.")
+    }
+    
+    return successVC
   }
   
 }

@@ -61,5 +61,9 @@ class SummaryViewModel: PaymentFlowManageable, NetworkActivityStatus {
       return nil
     }
   }
+  
+  func confirmPayment() {
+    paymentManager.confirmPayment()
+  }
 
 }

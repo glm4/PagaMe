@@ -32,3 +32,8 @@
 "summary.issuer_header" = "Emisor de su tarjeta";
 "summary.installment_header" = "Cuotas y costos del pago";
 "summary.amount_header" = "Total";
+
+// Success
+
+"success.go_back" = "Terminar";
+"success.payment_done" = "Pago Realizado!";

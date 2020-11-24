@@ -63,7 +63,13 @@ class SummaryViewController: ListViewController {
     super.setupBindings()
 
     viewModel.paymentStatusDriver
-      .filter { $0 == .summary }
+      .filter { status in
+        if case .completed(let result) = status {
+          return result.0 && result.1 == nil
+        }
+        
+        return false
+      }
       .asObservable()
       .subscribe(onNext: {[weak self] _ in
         
@@ -73,7 +79,11 @@ class SummaryViewController: ListViewController {
   }
   
   private func proceedToConfirmPayment() {
-    //TODO
+    AppNavigator.shared.navigate(to: HomeRoutes.success, with: .modal)
+  }
+  
+  override func continueButtonTapped() {
+    viewModel.confirmPayment()
   }
 
 }

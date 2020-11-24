@@ -32,4 +32,7 @@
 "summary.installment_header" = "Installment Costs";
 "summary.amount_header" = "Total";
 
+// Success
 
+"success.go_back" = "OK, cool!";
+"success.payment_done" = "Payment Done!";
